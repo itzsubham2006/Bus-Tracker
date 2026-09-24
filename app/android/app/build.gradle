@@ -1,0 +1,43 @@
+// This file configures the Android build for the Flutter app.
+// Flutter plugins are applied via settings.gradle's plugin loader.
+
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    // Flutter's Gradle plugin is applied automatically via settings.gradle
+    id "dev.flutter.flutter-gradle-plugin"
+}
+
+android {
+    namespace = "com.collegebus.tracker"
+    compileSdk = 34
+
+    // These values can't be set in pubspec.yaml — they're Android-specific
+    defaultConfig {
+        applicationId = "com.collegebus.tracker"
+        minSdk = 21       // Supports Android 5.0+ (vast majority of devices)
+        targetSdk = 34    // Target latest Android
+        versionCode = 1
+        versionName = "1.0.0"
+    }
+
+    buildTypes {
+        release {
+            // Disable code shrinking for now (can enable later for smaller APK)
+            minifyEnabled false
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+flutter {
+    source '../..'
+}

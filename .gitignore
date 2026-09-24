@@ -1,0 +1,39 @@
+# Backend
+backend/node_modules/
+backend/.env
+backend/.env.*
+!backend/.env.example
+*.db
+*.db-shm
+*.db-wal
+
+# Flutter
+app/.dart_tool/
+app/.packages
+app/build/
+app/.flutter-plugins
+app/.flutter-plugins-dependencies
+app/android/local.properties
+app/android/.gradle/
+app/android/app/build/
+app/android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java
+app/android/gradle/wrapper/gradle-wrapper.jar
+app/ios/Pods/
+app/ios/.symlinks/
+app/pubspec.lock
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Binaries / APKs
+*.apk
+*.aab
+
+# IDE
+.idea/
+.vscode/
+*.iml
+*.swp
+*.swo
+*~
