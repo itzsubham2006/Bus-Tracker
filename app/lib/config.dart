@@ -1,12 +1,20 @@
+import 'package:flutter/foundation.dart';
+
 /// Single source of truth for the backend URL.
-/// Change this when deploying to production.
+/// Automatically detects whether the app is running in Web/Desktop (localhost)
+/// or Android emulator (10.0.2.2).
 class AppConfig {
-  // Android emulator -> host localhost
-  static const String baseUrl = 'http://10.0.2.2:3000';
-  
-  // For physical device testing, use your computer's local IP:
-  // static const String baseUrl = 'http://192.168.x.x:3000';
-  
-  // For production:
-  // static const String baseUrl = 'https://your-server.railway.app';
+  static String get baseUrl {
+    if (kIsWeb) {
+      return 'http://localhost:3000';
+    }
+    // Android emulator -> host machine localhost
+    return 'http://10.0.2.2:3000';
+    
+    // For physical device testing, use your computer's local IP:
+    // return 'http://192.168.x.x:3000';
+    
+    // For production:
+    // return 'https://your-server.railway.app';
+  }
 }

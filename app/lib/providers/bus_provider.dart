@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import '../models/bus.dart';
 import '../services/api_service.dart';
@@ -9,6 +10,7 @@ class BusProvider extends ChangeNotifier {
   List<Bus> get buses => _buses;
 
   late SSEService _sseService;
+  Timer? _pollingTimer;
   
   // Expose the connection status so UI can show a "Reconnecting..." badge if needed
   ValueNotifier<SSEStatus> get sseStatus => _sseService.connectionStatus;
@@ -20,18 +22,15 @@ class BusProvider extends ChangeNotifier {
 
   void _init() async {
     // 1. Fetch initial state via standard REST API
-    _buses = await ApiService.fetchBuses();
-    notifyListeners();
+    await _refreshBuses();
 
     // 2. Connect to SSE for real-time updates
     _sseService.connect();
     _sseService.updateStream.listen((event) {
       if (event['type'] == 'buses') {
-        // Replace the whole list
         _buses = event['data'];
         notifyListeners();
       } else if (event['type'] == 'update') {
-        // Update a specific bus
         Bus updatedBus = event['data'];
         int index = _buses.indexWhere((b) => b.id == updatedBus.id);
         if (index != -1) {
@@ -47,10 +46,26 @@ class BusProvider extends ChangeNotifier {
     _sseService.connectionStatus.addListener(() {
       notifyListeners();
     });
+
+    // 3. Fallback polling: If SSE drops or is disconnected, poll every 5s
+    _pollingTimer = Timer.periodic(const Duration(seconds: 5), (_) async {
+      if (_sseService.connectionStatus.value != SSEStatus.connected) {
+        await _refreshBuses();
+      }
+    });
+  }
+
+  Future<void> _refreshBuses() async {
+    final fetched = await ApiService.fetchBuses();
+    if (fetched.isNotEmpty) {
+      _buses = fetched;
+      notifyListeners();
+    }
   }
 
   @override
   void dispose() {
+    _pollingTimer?.cancel();
     _sseService.dispose();
     super.dispose();
   }
