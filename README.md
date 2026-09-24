@@ -1,10 +1,10 @@
-# 🚌 College Bus Live Tracker
+#  College Bus Live Tracker
 
 A complete real-time college bus tracking solution built with **Flutter** (Mobile App) and **Node.js / Express** (Live SSE Backend).
 
 ---
 
-## 🌟 Highlights
+##  Highlights
 
 - **Zero Friction for Students**: No signups, no logins, no personal location sharing. Students simply open the app to see live bus locations on an interactive OpenStreetMap.
 - **Privacy-First Driver Mode**: Hidden behind a secret long-press gesture on the app bar. Unlocked using a per-bus secret token (no driver accounts).
@@ -14,7 +14,7 @@ A complete real-time college bus tracking solution built with **Flutter** (Mobil
 
 ---
 
-## 🏗️ Architecture
+##  Architecture
 
 ```
 college-bus-tracker/
@@ -42,7 +42,7 @@ college-bus-tracker/
 
 ---
 
-## 🚀 Quick Start
+##  Quick Start
 
 ### 1. Backend Server Setup
 
@@ -81,7 +81,7 @@ flutter build apk --debug
 
 ---
 
-## 🔑 Driver Mode & Authentication
+##  Driver Mode & Authentication
 
 1. **How to Enter Driver Mode**:  
    On the main screen, **long-press (press and hold for 2+ seconds)** the title **"College Bus Tracker"** in the top navigation bar.
@@ -92,7 +92,7 @@ flutter build apk --debug
 
 ---
 
-## 📡 API Overview
+##  API Overview
 
 | Method | Endpoint | Description | Auth |
 |---|---|---|---|
@@ -106,6 +106,6 @@ flutter build apk --debug
 
 ---
 
-## 📄 License
+##  License
 
 MIT License. See [LICENSE](LICENSE) for details.
