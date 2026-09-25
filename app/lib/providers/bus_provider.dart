@@ -11,6 +11,14 @@ class BusProvider extends ChangeNotifier {
 
   late SSEService _sseService;
   Timer? _pollingTimer;
+
+  // Stream to notify map to smoothly zoom into a specific bus
+  final StreamController<Bus> _focusBusController = StreamController<Bus>.broadcast();
+  Stream<Bus> get focusBusStream => _focusBusController.stream;
+
+  void focusOnBus(Bus bus) {
+    _focusBusController.add(bus);
+  }
   
   // Expose the connection status so UI can show a "Reconnecting..." badge if needed
   ValueNotifier<SSEStatus> get sseStatus => _sseService.connectionStatus;
@@ -65,6 +73,7 @@ class BusProvider extends ChangeNotifier {
 
   @override
   void dispose() {
+    _focusBusController.close();
     _pollingTimer?.cancel();
     _sseService.dispose();
     super.dispose();

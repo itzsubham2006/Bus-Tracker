@@ -99,6 +99,11 @@ class Bus {
     }
   }
 
+  /// Clean display name that removes any '(Route)' annotations so it renders as 'Bus 1', 'Bus 2', etc.
+  String get displayName {
+    return name.replaceAll(RegExp(r'\s*\([^)]*\)'), '').trim();
+  }
+
   /// Whether this bus has valid coordinates to show on the map.
   bool get hasLocation => lat != null && lng != null;
 }

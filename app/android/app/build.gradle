@@ -8,33 +8,48 @@ plugins {
     id "dev.flutter.flutter-gradle-plugin"
 }
 
+def localProperties = new Properties()
+def localPropertiesFile = rootProject.file('local.properties')
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.withReader('UTF-8') { reader ->
+        localProperties.load(reader)
+    }
+}
+def mapsApiKey = localProperties.getProperty('MAPS_API_KEY') ?: ""
+
 android {
     namespace = "com.collegebus.tracker"
-    compileSdk = 34
+    compileSdk = 36
+    buildToolsVersion = "35.0.0"
+    ndkVersion = "28.2.13676358"
+    ndkPath = "C:/Android/sdk/ndk/28.2.13676358"
 
     // These values can't be set in pubspec.yaml — they're Android-specific
     defaultConfig {
         applicationId = "com.collegebus.tracker"
-        minSdk = 21       // Supports Android 5.0+ (vast majority of devices)
-        targetSdk = 34    // Target latest Android
+        minSdkVersion = flutter.minSdkVersion       // Supports Android 5.0+ (vast majority of devices)
+        targetSdk = 36    // Target latest Android
         versionCode = 1
         versionName = "1.0.0"
+        manifestPlaceholders += [MAPS_API_KEY: mapsApiKey]
     }
 
     buildTypes {
         release {
-            // Disable code shrinking for now (can enable later for smaller APK)
-            minifyEnabled false
+            signingConfig signingConfigs.debug
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
 
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '17'
     }
 }
 

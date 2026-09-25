@@ -1,0 +1,7 @@
+# Example local.properties
+# Copy this file to local.properties or add MAPS_API_KEY to your existing local.properties.
+# NEVER commit your actual local.properties to git!
+
+flutter.sdk=C:\\path\\to\\flutter
+sdk.dir=C:\\path\\to\\Android\\sdk
+MAPS_API_KEY=YOUR_GOOGLE_MAPS_API_KEY_HERE

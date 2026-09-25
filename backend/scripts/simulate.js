@@ -13,22 +13,20 @@ const TOKEN = '69f3179b0e888eaeea1fbc7467304990ea0823e9afd6ef1fe7f4a1aa22f99226'
 const BACKEND_HOST = 'localhost';
 const BACKEND_PORT = 3000;
 
-// Waypoints simulating a route (College <-> Town)
+// Waypoints simulating a route in Kokrajhar 783370 (Station <-> Town <-> CIT / Bodoland Univ)
 const waypoints = [
-  { lat: 12.9715987, lng: 77.5945627, heading: 45 },
-  { lat: 12.9723000, lng: 77.5952000, heading: 50 },
-  { lat: 12.9731000, lng: 77.5961000, heading: 55 },
-  { lat: 12.9740000, lng: 77.5973000, heading: 60 },
-  { lat: 12.9749000, lng: 77.5985000, heading: 65 },
-  { lat: 12.9758000, lng: 77.5998000, heading: 70 },
-  { lat: 12.9765000, lng: 77.6012000, heading: 75 },
-  { lat: 12.9772000, lng: 77.6025000, heading: 80 },
-  { lat: 12.9765000, lng: 77.6012000, heading: 255 },
-  { lat: 12.9758000, lng: 77.5998000, heading: 250 },
-  { lat: 12.9749000, lng: 77.5985000, heading: 245 },
-  { lat: 12.9740000, lng: 77.5973000, heading: 240 },
-  { lat: 12.9731000, lng: 77.5961000, heading: 235 },
-  { lat: 12.9723000, lng: 77.5952000, heading: 230 },
+  { lat: 26.4022, lng: 90.2721, heading: 10, note: "Kokrajhar Railway Station" },
+  { lat: 26.4065, lng: 90.2735, heading: 15, note: "JD Road / Town Center" },
+  { lat: 26.4120, lng: 90.2750, heading: 18, note: "Tengapara" },
+  { lat: 26.4190, lng: 90.2768, heading: 22, note: "Bhatarmari" },
+  { lat: 26.4265, lng: 90.2785, heading: 25, note: "Balagaon" },
+  { lat: 26.4340, lng: 90.2810, heading: 30, note: "CIT Kokrajhar Campus" },
+  { lat: 26.4415, lng: 90.2860, heading: 35, note: "Bodoland University / Deborgaon" },
+  { lat: 26.4340, lng: 90.2810, heading: 210, note: "Returning via CIT Kokrajhar" },
+  { lat: 26.4265, lng: 90.2785, heading: 205, note: "Returning via Balagaon" },
+  { lat: 26.4190, lng: 90.2768, heading: 200, note: "Returning via Bhatarmari" },
+  { lat: 26.4120, lng: 90.2750, heading: 195, note: "Returning via Tengapara" },
+  { lat: 26.4065, lng: 90.2735, heading: 190, note: "Returning via JD Road" },
 ];
 
 function sendPost(path, data) {

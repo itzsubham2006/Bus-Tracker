@@ -37,10 +37,10 @@ function initDb() {
     const insert = db.prepare('INSERT INTO buses (id, name, token, is_active) VALUES (?, ?, ?, 0)');
     
     const defaultBuses = [
-      { id: 1, name: 'Bus 1 (North Route)' },
-      { id: 2, name: 'Bus 2 (South Route)' },
-      { id: 3, name: 'Bus 3 (East Route)' },
-      { id: 4, name: 'Bus 4 (West Route)' }
+      { id: 1, name: 'Bus 1' },
+      { id: 2, name: 'Bus 2' },
+      { id: 3, name: 'Bus 3' },
+      { id: 4, name: 'Bus 4' }
     ];
 
     const insertMany = db.transaction((buses) => {

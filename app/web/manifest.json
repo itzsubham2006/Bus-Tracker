@@ -1,0 +1,11 @@
+{
+    "name": "College Bus Tracker",
+    "short_name": "BusTracker",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#0175C2",
+    "theme_color": "#0175C2",
+    "description": "College Bus Tracker",
+    "orientation": "portrait-primary",
+    "prefer_related_applications": false
+}
