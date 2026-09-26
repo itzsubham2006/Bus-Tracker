@@ -73,18 +73,18 @@ class BusListPanel extends StatelessWidget {
 
   /// Builds a single list tile for one bus with a prominent zoom/locate button on the left.
   Widget _buildBusTile(BuildContext context, Bus bus) {
-    // Color-code by status: green = running, grey = stopped, orange = signal lost
+    // Use each bus's unique vehicle icon and color when running
     final Color statusColor;
     final IconData statusIcon;
     if (!bus.isActive) {
       statusColor = Colors.grey;
-      statusIcon = Icons.directions_bus_outlined;
+      statusIcon = bus.vehicleIcon;
     } else if (bus.stale) {
       statusColor = Colors.orange;
       statusIcon = Icons.warning_amber_rounded;
     } else {
-      statusColor = Colors.green;
-      statusIcon = Icons.directions_bus;
+      statusColor = bus.themeColor;
+      statusIcon = bus.vehicleIcon;
     }
 
     void handleLocateBus() {

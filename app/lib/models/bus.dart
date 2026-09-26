@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 /// Represents a single bus and its current tracking status.
 ///
 /// The backend sends JSON with snake_case keys (e.g., "is_active", "last_updated").
@@ -102,6 +104,38 @@ class Bus {
   /// Clean display name that removes any '(Route)' annotations so it renders as 'Bus 1', 'Bus 2', etc.
   String get displayName {
     return name.replaceAll(RegExp(r'\s*\([^)]*\)'), '').trim();
+  }
+
+  /// Distinct color assigned to each bus so students can identify them on the map.
+  Color get themeColor {
+    switch (id) {
+      case 1:
+        return const Color(0xFF1565C0); // Royal Blue for Bus 1
+      case 2:
+        return const Color(0xFF2E7D32); // Emerald Green for Bus 2
+      case 3:
+        return const Color(0xFF6A1B9A); // Deep Purple for Bus 3
+      case 4:
+        return const Color(0xFFD84315); // Crimson Orange for Bus 4
+      default:
+        return const Color(0xFF00838F); // Teal fallback
+    }
+  }
+
+  /// Distinct vehicle/car/bus icon assigned to each bus.
+  IconData get vehicleIcon {
+    switch (id) {
+      case 1:
+        return Icons.directions_car_filled; // Car icon for Bus 1
+      case 2:
+        return Icons.airport_shuttle;       // Shuttle Van icon for Bus 2
+      case 3:
+        return Icons.local_taxi;            // Taxi/Sedan icon for Bus 3
+      case 4:
+        return Icons.directions_bus_filled; // Bus icon for Bus 4
+      default:
+        return Icons.directions_car;
+    }
   }
 
   /// Whether this bus has valid coordinates to show on the map.
