@@ -19,14 +19,17 @@ class _BusMapState extends State<BusMap> {
   // Current map type: defaults to normal, toggles to hybrid/satellite
   MapType _currentMapType = MapType.normal;
 
-  // Kokrajhar, Assam (PIN: 783370) Center Coordinates
-  final LatLng _kokrajharCenter = const LatLng(26.4014, 90.2716);
+  // Center coordinate between Girls College Kokrajhar and Simbargaon Rd
+  final LatLng _kokrajharCenter = const LatLng(26.4385, 90.2845);
 
-  // Region Bounds restricting the map strictly to Kokrajhar and surroundings
+  // Region bounds strictly between Girls College Kokrajhar (SW) and Simbargaon Rd (NE)
   final LatLngBounds _kokrajharBounds = LatLngBounds(
-    southwest: const LatLng(26.3300, 90.1800),
-    northeast: const LatLng(26.4800, 90.3600),
+    southwest: const LatLng(26.3895, 90.2630),
+    northeast: const LatLng(26.486532010995568, 90.30555318584854),
   );
+
+  // Track if initial camera auto-fit has completed on app startup
+  bool _initialFitDone = false;
 
   @override
   void initState() {
@@ -96,13 +99,14 @@ class _BusMapState extends State<BusMap> {
     return Stack(
       children: [
         GoogleMap(
+          key: const ValueKey('kokrajhar_google_map'),
           initialCameraPosition: CameraPosition(
             target: _kokrajharCenter,
-            zoom: 13.5,
+            zoom: 12.5,
           ),
           mapType: _currentMapType,
-          minMaxZoomPreference: const MinMaxZoomPreference(11.5, 18.0),
-          cameraTargetBounds: CameraTargetBounds(_kokrajharBounds),
+          minMaxZoomPreference: const MinMaxZoomPreference(10.0, 20.0),
+          cameraTargetBounds: CameraTargetBounds.unbounded,
           markers: markers,
           myLocationEnabled: false,
           myLocationButtonEnabled: false,
@@ -110,6 +114,17 @@ class _BusMapState extends State<BusMap> {
           zoomControlsEnabled: false,
           onMapCreated: (controller) {
             _mapController = controller;
+            // Auto-fit camera between Kokrajhar Police Station and Simbargaon Rd ONLY on initial launch
+            if (!_initialFitDone) {
+              _initialFitDone = true;
+              Future.delayed(const Duration(milliseconds: 250), () {
+                if (mounted) {
+                  controller.animateCamera(
+                    CameraUpdate.newLatLngBounds(_kokrajharBounds, 48),
+                  );
+                }
+              });
+            }
           },
         ),
 
